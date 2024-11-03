@@ -1,0 +1,16 @@
+{
+  "name": "ZeusVolt",
+  "version": "1.0.0",
+  "description": "ZeusVolt is an experimental bot.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "magnum_chaos",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.1.0",
+    "node-fetch": "^2.6.6"
+  }
+}
