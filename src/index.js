@@ -1,6 +1,12 @@
-const { Client } = require("whatsapp-web.js");
+const { Client, NoAur } = require("whatsapp-web.js");
 
-const client = new Client();
+const client = new Client({
+  authStrategy: new NoAuth(),
+  puppeteer: {
+    args: ["--headless", "--no-sandbox", "--no-first-run", "--disable-gpu", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+    headless: false 
+  }
+})
 
 client.on("qr", (qr) => {
   // Generate and scan this code with your phone
