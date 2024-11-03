@@ -1,4 +1,4 @@
-const { Client, NoAur } = require("whatsapp-web.js");
+const { Client, NoAuth } = require("whatsapp-web.js");
 
 const client = new Client({
   authStrategy: new NoAuth(),
@@ -9,13 +9,11 @@ const client = new Client({
 })
 
 client.on("qr", (qr) => {
-  // Generate and scan this code with your phone
-  
-  console.log("QR RECEIVED", qr);
+  console.log("QR Code pra logar", qr);
 });
 
 client.on("ready", () => {
-  console.log("Client is ready!");
+  console.log("To on");
 });
 
 client.on("message", msg => {
