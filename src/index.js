@@ -1,5 +1,3 @@
-const qrcode = require("qrcode-terminal");
-
 const { Client, NoAuth } = require("whatsapp-web.js");
 
 const client = new Client({
@@ -11,7 +9,7 @@ const client = new Client({
 })
 
 client.on("qr", (qr) => {
-  qrcode.generate(qr, {small: true})
+  console.log(qr);
 });
 
 client.on("ready", () => {
