@@ -53,7 +53,7 @@ module.exports = {
           
           client.sendMessage(User.ID, "Imagine uma mensagem de ad aqui!", {
             caption: "Imagem de anuncio",
-            image: "./media/presentation_1.jpg"
+            image: "../../media/presentation_1.jpg"
           });
           
           User.lastAd = Date.now();
