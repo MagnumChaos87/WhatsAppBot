@@ -1,3 +1,5 @@
+const fs = require("node:fs");
+
 const { Client, NoAuth } = require("whatsapp-web.js");
 
 const client = new Client({
@@ -8,18 +10,8 @@ const client = new Client({
   }
 })
 
-client.on("qr", (qr) => {
-  console.log(qr);
-});
-
-client.on("ready", () => {
-  console.log("TO ON!!");
-});
-
-client.on("message", msg => {
-  if (msg.body == "!ping") {
-    msg.reply("pong");
-  }
-});
+for (const file of fs.readdirSync("./src/handlers").filter(file => file.endsWith("Handler.js"))) {
+  require(`./handlers/${file}`)(client)
+};
 
 client.initialize();
