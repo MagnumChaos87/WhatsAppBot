@@ -1,9 +1,9 @@
 const fs = require("node:fs");
 
-const { Client, NoAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth } = require("whatsapp-web.js");
 
 const client = new Client({
-  authStrategy: new NoAuth(),
+  authStrategy: new LocalAuth(),
   puppeteer: {
     args: ["--headless", "--no-sandbox", "--no-first-run", "--disable-gpu", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
     headless: false 
