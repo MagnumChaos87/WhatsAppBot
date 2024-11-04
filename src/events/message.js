@@ -5,6 +5,8 @@ module.exports = {
       console.log(message);
       
       if (message.body.toLowerCase() === "oi") message.reply("Boa Tarde");
+      
+      if (message.body.toLowerCase() === "tchau") message.reply("Até logo, até mais ver, bon voyage, arrivederci, até mais, adeus, boa viagem, vá em paz, que a porta bata onde o sol não bate, não volte mais aqui, hasta la vista baby, escafeda-se, e saia logo daqui")
     } catch(err) {
       console.log(err)
     }
