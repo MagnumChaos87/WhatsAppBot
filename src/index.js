@@ -8,7 +8,7 @@ const client = new Client({
     args: ["--headless", "--no-sandbox", "--no-first-run", "--disable-gpu", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
     headless: false 
   }
-})
+});
 
 for (const file of fs.readdirSync("./src/handlers").filter(file => file.endsWith("Handler.js"))) {
   require(`./handlers/${file}`)(client)
