@@ -2,11 +2,9 @@ module.exports = {
   name: "message",
   async execute(message, client) {
     try {
-      console.log(message.body);
+      console.log(message);
       
-      if (message.body === "oi") {
-        message.reply("bom dia")
-      }
+      if (message.body.toLowerCase() === "oi") message.reply("Boa Tarde");
     } catch(err) {
       console.log(err)
     }
