@@ -49,9 +49,12 @@ module.exports = {
         })
         
         for (User of Users) {
-          if (User.lastAd + hour > Date.now()) continue;
+          if (User.lastAd + hour > Date.now() || User.status) continue;
           
-          client.sendMessage(User.ID, "🍖〢Cápsulas que curam a fome por apenas 1000000000000 pesos bolivianos!\n\n- Ingerir essa Cápsula Magica com um pão faz a fome sumir num instante.\n\nCompre já: https://virustotal.com");
+          client.sendMessage(User.ID, "Imagine uma mensagem de ad aqui!", {
+            caption: "Imagem de anuncio",
+            image: "./media/presentation_1.jpg"
+          });
           
           User.lastAd = Date.now();
           
