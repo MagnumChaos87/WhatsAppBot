@@ -11,7 +11,8 @@ module.exports = {
       });
       
       if (!User) User = await UserSchema.create({
-        ID: message.from
+        ID: message.from,
+        phoneNumber: message.from.replace(/@.*/, "")
       });
       
       if (message.body.toLowerCase() === "oi") message.reply("Boa Tarde");
