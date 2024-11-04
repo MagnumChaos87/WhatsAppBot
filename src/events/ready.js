@@ -8,15 +8,15 @@ module.exports = {
   name: "ready",
   async execute(client) {
     try {
-      console.log("ZeusBolt: Conectado.");
+      console.log("[ZeusBolt]: ⚡");
       
       await mongoose.connect(process.env.MONGO_TOKEN + "advertisement", {
         useNewUrlParser: true,
         useUnifiedTopology: true
         }).then(() => {
-        console.log(`[${client.user.username}DB Status]: Online`);
+        console.log(`[$ZeusBoltDB Status]: ⚡`);
       }).catch(async (err) => {
-        console.log(`[${client.user.username}DB Status]: Offline\n\n${err}`);
+        console.log(`[ZeusBoltDB Status]: ✖`, err);
         return;
       });
       
@@ -45,7 +45,7 @@ module.exports = {
       
       async function sendAd() {
         const Users = await UserSchema.find().then(async (Users) => {
-          return Array.from(Users.values())
+          return Array.from(Users.values());
         })
         
         for (User of Users) {
