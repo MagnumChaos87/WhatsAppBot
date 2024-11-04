@@ -14,7 +14,7 @@ module.exports = {
         useNewUrlParser: true,
         useUnifiedTopology: true
         }).then(() => {
-        console.log(`[$ZeusBoltDB Status]: ⚡`);
+        console.log(`[ZeusBoltDB Status]: ⚡`);
       }).catch(async (err) => {
         console.log(`[ZeusBoltDB Status]: ✖`, err);
         return;
@@ -41,7 +41,7 @@ module.exports = {
       
       setInterval(async () => {
         await sendAd();
-      }, second);
+      }, minute);
       
       async function sendAd() {
         const Users = await UserSchema.find().then(async (Users) => {
@@ -49,9 +49,13 @@ module.exports = {
         })
         
         for (User of Users) {
-          if (User.lastAd + week > Date.now()) continue;
+          if (User.lastAd + hour > Date.now()) continue;
           
-          client.sendMessage(User.ID, "Imagine um Anúncio aqui!");
+          client.sendMessage(User.ID, "🍖〢Cápsulas que curam a fome por apenas 1000000000000 pesos bolivianos!\n\n- Ingerir essa Cápsula Magica com um pão faz a fome sumir num instante.\n\nCompre já: https://virustotal.com");
+          
+          User.lastAd = Date.now();
+          
+          await User.save();
         }
       }
     } catch(err) {
