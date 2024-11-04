@@ -39,7 +39,7 @@ module.exports = {
       const day = 24 * hour;
       const week = 7 * day;
       
-      setInterval(() => {
+      setInterval(async () => {
         await sendAd();
       }, second);
       
