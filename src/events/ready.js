@@ -51,9 +51,11 @@ module.exports = {
         for (User of Users) {
           if (User.lastAd + hour > Date.now() || User.status) continue;
           
+          const imgPath = __dirname + "media/presentation_1.jpg";
+          
           client.sendMessage(User.ID, "Imagine uma mensagem de ad aqui!", {
             caption: "Imagem de anuncio",
-            image: "../../media/presentation_1.jpg"
+            image: imgPath
           });
           
           User.lastAd = Date.now();
