@@ -4,10 +4,7 @@ module.exports = {
   name: "message",
   async execute(message, client) {
     try {
-      console.log(client.info.me);
-      console.log(message);
-      
-      if (message.from === client.me) return;
+      if (message.from === client.info.wid) return console.log(message.from + "+++" + client.info.wid);
       
       let User = await UserSchema.findOne({
         ID: message.from
