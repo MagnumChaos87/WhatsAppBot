@@ -4,7 +4,8 @@ module.exports = {
   name: "message",
   async execute(message, client) {
     try {
-      console.log(client.me);
+      console.log(client.info.me);
+      console.log(message);
       
       if (message.from === client.me) return;
       
