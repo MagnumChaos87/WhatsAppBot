@@ -52,4 +52,6 @@ const commands = [];
   }
 })();
 
+console.log(commands);
+
 module.exports = commands;
