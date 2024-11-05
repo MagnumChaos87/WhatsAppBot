@@ -13,6 +13,8 @@ module.exports = {
       if (message.body.startsWith(prefix) && User.role === "admin") {
         const args = message.body.slice(prefix.length).trim().split(/\s+/g);
         
+        console.log(client.commands);
+        
         const command = client.commands.get(args[0]);
         
         if (command) {
