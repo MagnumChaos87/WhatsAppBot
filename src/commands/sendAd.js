@@ -7,6 +7,8 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
+      if (!args[1]) return message.reply("✖〢Para utilizar este comando, você deve inserir um número");
+      
       const phoneNumber = args[1];
       
       if (!/^\(?[1-9]{2}\)?\s?[9][0-9]{3}\-[0-9]{4}$/.text(phoneNumber)) return message.reply("✖〢Número inválido!");
