@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const UserSchema = require("../schemas/UserSchema");
 
+const { MessageMedia } = require("whatsapp-web.js");
+
 require("dotenv").config();
 
 module.exports = {
@@ -48,13 +50,13 @@ module.exports = {
           return Array.from(Users.values());
         })
         
+        const media = await MessageMedia.fromFilePath("./media/presentation_1.jpg");
+        
         for (User of Users) {
           if (User.lastAd + hour > Date.now() || User.status) continue;
           
-          client.sendMessage(User.ID, "Imagine uma mensagem de ad aqui!", {
-            caption: "Imagem de anuncio",
-            attachment: "./media/presentation_1.jpg"
-          });
+          client.sendMessage(User.ID, media, {
+            caption: "Imagem de anuncio"});
           
           User.lastAd = Date.now();
           
