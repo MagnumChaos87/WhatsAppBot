@@ -10,6 +10,8 @@ const client = new Client({
   }
 });
 
+client.commands = new Map();
+
 for (const file of fs.readdirSync("./src/handlers").filter(file => file.endsWith("Handler.js"))) {
   require(`./handlers/${file}`)(client)
 };
