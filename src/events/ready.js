@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const UserSchema = require("../schemas/UserSchema");
 
+const ClientSchema = require("../schemas/ClientSchema");
+
 const { MessageMedia } = require("whatsapp-web.js");
 
 require("dotenv").config();
@@ -40,6 +42,14 @@ module.exports = {
       const hour = 60 * minute;
       const day = 24 * hour;
       const week = 7 * day;
+      
+      await ClientSchema.findOne({
+        ID: client.info.wid
+      }).then(async (Client) => {
+        if (!Client) await ClientSchema.create({
+          ID: client.info.wid
+        })
+      })
       
       setInterval(async () => {
         await sendAd();
