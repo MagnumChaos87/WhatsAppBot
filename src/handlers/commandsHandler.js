@@ -9,7 +9,7 @@ module.exports = async (client) => {
     const dirPath = path.join("./src/commands/");
     
     const Client = await ClientSchema.findOne({
-      ID: client.info.wid
+      ID: client.info.wid._serialized
     });
     
     async function readFiles(dir) {
