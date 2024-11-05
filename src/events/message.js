@@ -20,7 +20,7 @@ module.exports = {
         const command = client.commands.find(cmd => cmd.name === args[0] && cmd.type === this.name);
         
         if (command) {
-          client.command.execute(message, args, client);
+          command.execute(message, args, client);
           
           return;
         }
