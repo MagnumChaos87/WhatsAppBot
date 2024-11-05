@@ -1,21 +1,23 @@
 const UserSchema = require("../schemas/UserSchema");
 
+const ClientSchema = require("../schemas/ClientSchema");
+
 module.exports = {
   name: "message",
   async execute(message, client) {
     try {
-      const prefix = "!";
+      const Client = await ClientSchema.findOne({
+        ID: client.info.wid
+      });
       
       const User = await UserSchema.findOne({
         ID: message.from
       });
       
-      if (message.body.startsWith(prefix) && User.role === "admin") {
-        const args = message.body.slice(prefix.length).trim().split(/\s+/g);
+      if (message.body.startsWith(Client.prefix) && User.role === "admin") {
+        const args = message.body.slice(Client.prefix.length).trim().split(/\s+/g);
         
-        console.log(client.commands);
-        
-        const command = client.commands.get(args[0]);
+        const command = client.commands.find(cmd => cmd.name === args[0]);
         
         if (command) {
           client.command.execute(message, args, client);
