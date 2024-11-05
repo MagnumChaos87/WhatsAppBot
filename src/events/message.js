@@ -7,7 +7,7 @@ module.exports = {
   async execute(message, client) {
     try {
       const Client = await ClientSchema.findOne({
-        ID: client.info.wid
+        ID: client.info.wid._serialized
       });
       
       const User = await UserSchema.findOne({
@@ -17,7 +17,7 @@ module.exports = {
       if (message.body.startsWith(Client.prefix) && User.role === "admin") {
         const args = message.body.slice(Client.prefix.length).trim().split(/\s+/g);
         
-        const command = client.commands.find(cmd => cmd.name === args[0]);
+        const command = client.commands.find(cmd => cmd.name === args[0] && cmd.type === this.name);
         
         if (command) {
           client.command.execute(message, args, client);
