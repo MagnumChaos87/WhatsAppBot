@@ -44,10 +44,10 @@ module.exports = {
       const week = 7 * day;
       
       await ClientSchema.findOne({
-        ID: client.info.wid
+        ID: client.info.wid._serialized
       }).then(async (Client) => {
         if (!Client) await ClientSchema.create({
-          ID: client.info.wid
+          ID: client.info.wid._serialized
         })
       })
       
