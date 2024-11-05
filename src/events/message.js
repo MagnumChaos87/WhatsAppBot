@@ -21,7 +21,7 @@ module.exports = {
           return;
         }
         
-        client.sendMessage(messag.from, "✖〢Comando não encontrado.");
+        message.reply(messag.from, "✖〢Comando não encontrado.");
         
         return;
       }
