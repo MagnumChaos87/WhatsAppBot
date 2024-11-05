@@ -13,6 +13,7 @@ module.exports = {
       });
       
       if (message.body.startsWith(prefix) && User.role === "admin") {
+        
         const args = message.body.slice(prefix.length).trim().split(/\s+/g);
         
         const command = commands.find(cmd => cmd.name === args[0] && cmd.type === this.name);
