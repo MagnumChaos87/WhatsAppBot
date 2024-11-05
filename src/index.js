@@ -10,8 +10,6 @@ const client = new Client({
   }
 });
 
-for (const file of fs.readdirSync("./src/handlers").filter(file => file.endsWith("Handler.js"))) {
-  require(`./handlers/${file}`)(client)
-};
+require("./handlers/eventsHandler")(client);
 
 client.initialize();
