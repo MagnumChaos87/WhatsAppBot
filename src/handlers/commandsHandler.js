@@ -2,9 +2,15 @@ const fs = require("node:fs");
 
 const path = require("node:path");
 
+const ClientSchema = require("../schemas/ClientSchema");
+
 module.exports = async (client) => {
   try {
     const dirPath = path.join("./src/commands/");
+    
+    const Client = await ClientSchema.findOne({
+      ID: client.info.wid
+    });
     
     async function readFiles(dir) {
       const filesOrFolders = await fs.promises.readdir(dir).then((f) => {
@@ -29,7 +35,7 @@ module.exports = async (client) => {
     async function commandRegister(command) {
       if (!Object.keys(command).length) return;
       
-      await client.commands[command.data.type].set(command.data.name, command);
+      await Client.commands.push(command);
     }
     
     const allFilePaths = await readFiles(dirPath);
@@ -45,6 +51,8 @@ module.exports = async (client) => {
         await commandRegister(file);
       }
     }
+    
+    await Client.save();
   } catch(err) {
     console.log(err)
   }
