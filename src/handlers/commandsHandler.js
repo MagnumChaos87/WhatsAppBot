@@ -4,50 +4,52 @@ const path = require("node:path");
 
 const commands = [];
 
-try {
-  const dirPath = path.join("./src/commands/");
-  
-  async function readFiles(dir) {
-    const filesOrFolders = await fs.promises.readdir(dir).then((f) => {
-      return f.map((d) => {
-        return path.join(dir, d)
-      })
-    });
+(async () => {
+  try {
+    const dirPath = path.join("./src/commands/");
     
-    const files = filesOrFolders.filter((f) => f.endsWith(".js"));
-    
-    const folders = filesOrFolders.filter((f) => !f.endsWith(".js"));
-    
-    for (d of folders) {
-      const items = await readFiles(d);
+    async function readFiles(dir) {
+      const filesOrFolders = await fs.promises.readdir(dir).then((f) => {
+        return f.map((d) => {
+          return path.join(dir, d)
+        })
+      });
       
-      files.push(...items);
-    }
-    
-    return files;
-  }
-  
-  async function commandRegister(command) {
-    if (!Object.keys(command).length) return;
-    
-    await commands.push(command);
-  }
-  
-  const allFilePaths = await readFiles(dirPath);
-  
-  for (filePath of allFilePaths) {
-    const file = require(path.resolve(filePath));
-    
-    if (file instanceof Array) {
-      for (cmd of file) {
-        await commandRegister(cmd);
+      const files = filesOrFolders.filter((f) => f.endsWith(".js"));
+      
+      const folders = filesOrFolders.filter((f) => !f.endsWith(".js"));
+      
+      for (d of folders) {
+        const items = await readFiles(d);
+        
+        files.push(...items);
       }
-    } else {
-      await commandRegister(file);
+      
+      return files;
     }
+    
+    async function commandRegister(command) {
+      if (!Object.keys(command).length) return;
+      
+      await commands.push(command);
+    }
+    
+    const allFilePaths = await readFiles(dirPath);
+    
+    for (filePath of allFilePaths) {
+      const file = require(path.resolve(filePath));
+      
+      if (file instanceof Array) {
+        for (cmd of file) {
+          await commandRegister(cmd);
+        }
+      } else {
+        await commandRegister(file);
+      }
+    }
+  } catch(err) {
+    console.log(err)
   }
-} catch(err) {
-  console.log(err)
-}
+})();
 
 module.exports = commands;
