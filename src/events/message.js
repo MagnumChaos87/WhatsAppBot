@@ -4,20 +4,27 @@ module.exports = {
   name: "message",
   async execute(message, client) {
     try {
-      if (message.from === client.info.wid) return console.log(message.from + "+++" + client.info.wid);
+      const prefix = "!";
       
-      let User = await UserSchema.findOne({
+      const User = await UserSchema.findOne({
         ID: message.from
       });
       
-      if (!User) User = await UserSchema.create({
-        ID: message.from,
-        phoneNumber: message.from.replace(/@.*/, "")
-      });
-      
-      if (message.body.toLowerCase() === "oi") message.reply("Boa Tarde");
-      
-      if (message.body.toLowerCase() === "tchau") message.reply("Até logo, até mais ver, bon voyage, arrivederci, até mais, adeus, boa viagem, vá em paz, que a porta bata onde o sol não bate, não volte mais aqui, hasta la vista baby, escafeda-se, e saia logo daqui");
+      if (message.body.startsWith(prefix) && User.role === "admin") {
+        const args = message.body.slice(prefix.length).trim().split(/\s+/g);
+        
+        const command = client.commands.get(args[0]);
+        
+        if (command) {
+          client.command.execute(message, args, client);
+          
+          return;
+        }
+        
+        client.sendMessage(messag.from, "✖〢Comando não encontrado.");
+        
+        return;
+      }
     } catch(err) {
       console.log(err)
     }
