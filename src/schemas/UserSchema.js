@@ -5,6 +5,7 @@ const UserSchema = new Schema({
   phoneNumber: {type: String, default: ""},
   status: {type: String, default: ""},
   role: {type: String, default: "user"},
+  session: {type: Array, default: []},
   lastAd: {type: Number, default: 0}
 });
 
