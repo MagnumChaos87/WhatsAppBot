@@ -55,8 +55,9 @@ module.exports = {
         for (User of Users) {
           if (User.lastAd + hour > Date.now() || User.status) continue;
           
-          client.sendMessage(User.ID, media, {
-            caption: "Imagem de anuncio"});
+          await client.sendMessage(User.ID, media).then(() => {
+            client.sendMessage(User.ID, "Imagine uma mensagem de anúncio aqui!")
+          });
           
           User.lastAd = Date.now();
           
