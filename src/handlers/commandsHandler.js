@@ -4,7 +4,7 @@ const path = require("node:path");
 
 const commands = [];
 
-(async () => {
+async function getAllCommands() {
   try {
     const dirPath = path.join("./src/commands/");
     
@@ -50,7 +50,7 @@ const commands = [];
   } catch(err) {
     console.log(err)
   }
-})();
+};
 
 console.log(commands);
 
