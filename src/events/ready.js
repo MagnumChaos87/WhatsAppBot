@@ -63,7 +63,7 @@ module.exports = {
         const media = await MessageMedia.fromFilePath("./media/presentation_1.jpg");
         
         for (User of Users) {
-          if (User.lastAd + hour > Date.now() || User.status) continue;
+          if (User.lastAd + week > Date.now() || User.status) continue;
           
           await client.sendMessage(User.ID, media).then(() => {
             client.sendMessage(User.ID, "Imagine uma mensagem de anúncio aqui!")
