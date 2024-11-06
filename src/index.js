@@ -12,12 +12,8 @@ const client = new Client({
 
 client.commands = new Map();
 
-client.commands.set("oi", "teste");
-
-console.log(client.commands);
-
-for (const file of fs.readdirSync("./handlers/")) {
-  require(`./handlers/${file}`)(client, commands);
-}
+for (const file of fs.readdirSync("./src/handlers").filter(file => file.endsWith("Handler.js"))) {
+  require(`./handlers/${file}`)(client)
+};
 
 client.initialize();
