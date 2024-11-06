@@ -2,9 +2,7 @@ const fs = require("node:fs");
 
 const path = require("node:path");
 
-const commands = [];
-
-async function getAllCommands() {
+module.exports = async (client) => {
   try {
     const dirPath = path.join("./src/commands/");
     
@@ -31,7 +29,7 @@ async function getAllCommands() {
     async function commandRegister(command) {
       if (!Object.keys(command).length) return;
       
-      await commands.push(command);
+      await client.commands.set(command.data.name, command);
     }
     
     const allFilePaths = await readFiles(dirPath);
@@ -50,8 +48,4 @@ async function getAllCommands() {
   } catch(err) {
     console.log(err)
   }
-};
-
-console.log(commands);
-
-module.exports = commands;
+}
