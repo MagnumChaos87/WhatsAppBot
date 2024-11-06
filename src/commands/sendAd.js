@@ -9,9 +9,9 @@ module.exports = {
     try {
       if (!args[1]) return message.reply("✖〢Para utilizar este comando, você deve inserir um número");
       
-      const phoneNumber = args[1];
+      let phoneNumber = args.slice(1, args.length).join("").replace(/-|[+]/g, "");
       
-      if (!/^\(?[1-9]{2}\)?\s?[9][0-9]{3}\-[0-9]{4}$/.test(phoneNumber)) return message.reply("✖〢Número inválido!");
+      if (!/^[0-9]{12}$/.test(phoneNumber)) return message.reply("✖〢Número inválido!");
       
       const media = await MessageMedia.fromFilePath("./media/presentation_1.jpg");
       
@@ -22,7 +22,7 @@ module.exports = {
       if (message_1 && message_2) {
         message.reply("✔〢Anúncio enviado com sucesso!");
       } else {
-        message.reply("✖〢Falha ao enviar anúncio.");
+        message.reply("✖〢Falha ao enviar anúncio.\n\n⇝ Verifique-se que o número inserido segue o padrão abaixo:\n\n+55 21 9xxxx-xxxx\n\n- 55: Código do País\n- 21: DDD\n- 9xxxx-xxxx: Número da Linha (podendo ou não começar com 9)");
       }
     } catch(err) {
       console.log(err)
