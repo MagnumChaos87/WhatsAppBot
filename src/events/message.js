@@ -16,7 +16,7 @@ module.exports = {
         
         const args = message.body.slice(prefix.length).trim().split(/\s+/g);
         
-        const command = commands.find(cmd => cmd.name === args[0] && cmd.type === this.name);
+        const command = client.commands.find(cmd => cmd.data.name === args[0] && cmd.data.type === this.name);
         
         if (command) {
           command.execute(message, args, client);
