@@ -10,6 +10,14 @@ const client = new Client({
   }
 });
 
-require("./handlers/eventsHandler")(client);
+client.commands = new Collection();
+
+client.commands.set("oi", "teste");
+
+console.log(client.commands);
+
+for (const file of fs.readdirSync("./handlers/")) {
+  require(`./handlers/${file}`)(client, commands);
+}
 
 client.initialize();
