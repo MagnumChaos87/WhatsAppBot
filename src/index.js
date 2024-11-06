@@ -10,7 +10,7 @@ const client = new Client({
   }
 });
 
-client.commands = new Collection();
+client.commands = new Map();
 
 client.commands.set("oi", "teste");
 
