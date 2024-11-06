@@ -11,7 +11,7 @@ module.exports = {
       
       let phoneNumber = args.slice(1, args.length).join("").replace(/-|[+]/g, "");
       
-      if (!/^[0-9]{12, 13}$/.test(phoneNumber)) return message.reply("✖〢Número inválido!");
+      if (!/[0-9]{12,13}/.test(phoneNumber)) return message.reply("✖〢Número inválido!");
       
       const media = await MessageMedia.fromFilePath("./media/presentation_1.jpg");
       
