@@ -16,11 +16,11 @@ module.exports = {
         
         const args = message.body.slice(prefix.length).trim().split(/\s+/g);
         
-        const allCommands = client.commands.filter(cmd => cmd.data.type === this.name);
-        
-        const command = allCommands.get(args[0]);
+        const command = client.commands.get(args[0]);
         
         if (command) {
+          if (command.data.type !== this.name) return;
+          
           command.execute(message, args, client);
           
           return;
