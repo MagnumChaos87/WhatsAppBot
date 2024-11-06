@@ -15,9 +15,9 @@ module.exports = {
       
       const media = await MessageMedia.fromFilePath("./media/presentation_1.jpg");
       
-      const message_1 = await client.sendMessage(phoneNumber, media);
+      const message_1 = await client.sendMessage(phoneNumber + "@c.us", media);
       
-      const message_2 = await client.sendMessage(phoneNumber, "Imagine uma mensagem de anúncio aqui!");
+      const message_2 = await client.sendMessage(phoneNumber + "@c.us", "Imagine uma mensagem de anúncio aqui!");
       
       if (message_1 && message_2) {
         message.reply("✔〢Anúncio enviado com sucesso!");
