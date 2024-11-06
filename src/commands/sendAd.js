@@ -17,7 +17,7 @@ module.exports = {
       
       const message_1 = await client.sendMessage(phoneNumber + "@c.us", media);
       
-      const message_2 = await client.sendMessage(phoneNumber + "@c.us", "Imagine uma mensagem de anúncio aqui!");
+      const message_2 = await client.sendMessage(phoneNumber + "@c.us", "Olá, a RF Multieco tem novidades para você! Aproveite nossa promoção especial em serviços de instalação e manutenção elétrica. Garantimos qualidade e segurança para sua casa ou empresa. Fale com a gente para saber mais!");
       
       if (message_1 && message_2) {
         message.reply("✔〢Anúncio enviado com sucesso!");
