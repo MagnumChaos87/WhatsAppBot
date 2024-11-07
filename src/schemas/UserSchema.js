@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema({
   ID: {type: String, required: true},
-  phoneNumber: {type: String, default: ""},
   status: {type: String, default: ""},
   role: {type: String, default: "user"},
   session: {type: Array, default: []},
