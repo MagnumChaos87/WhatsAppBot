@@ -33,13 +33,15 @@ module.exports = {
         const users = xlsx.utils.sheet_to_json(worksheet);
         
         for (const user of users) {
-          console.log(user);
+          const phoneNumber = Object.keys(user)[0].replace(/-|[+]/g, "");
           
-          const User = await UserSchema.findOne({ ID: user + "@c.us" });
+          if (!/[0-9]{12,13}/.test(phoneNumber)) continue;
+          
+          const User = await UserSchema.findOne({ ID: phoneNumber + "@c.us" });
           
           if (User) continue;
           
-          await UserSchema.create({ ID: user + "@c.us" });
+          await UserSchema.create({ ID: phoneNumber + "@c.us" });
         }
         
         fs.unlinkSync(tempFilePath);
