@@ -1,3 +1,5 @@
+const UserSchema = require("../schemas/UserSchema");
+
 const { MessageMedia } = require("whatsapp-web.js");
 
 module.exports = {
@@ -7,7 +9,19 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
-      if (!args[1]) return message.reply("✖〢Para utilizar este comando, você deve inserir um número");
+      if (!args[1]) return message.reply("✖〢Para utilizar este comando, você deve inserir um número.");
+      
+      if (args[1].toLowerCase() === "todos") {
+        const Users = await UserSchema.find();
+        
+        for (const User of Users) {
+          client.sendMessage(User.ID, "Testando envio em massa")
+        }
+        
+        message.reply("Envios feito com sucesso.")
+        
+        return;
+      }
       
       let phoneNumber = args.slice(1, args.length).join("").replace(/-|[+]/g, "");
       
