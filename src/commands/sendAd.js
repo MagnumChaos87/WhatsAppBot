@@ -15,13 +15,7 @@ module.exports = {
         const Users = await UserSchema.find();
         
         for (const User of Users) {
-          client.sendMessage(User.ID, {
-            text: "testando envio e messa e testando botao",
-            buttons: [{
-              body: "Instagram",
-              url: "https://www.instagram.com/rfoliveirasc/"
-            }] 
-          })
+          client.sendMessage(User.ID, "Testando envio em massa")
         }
         
         message.reply("Envios feito com sucesso.")
