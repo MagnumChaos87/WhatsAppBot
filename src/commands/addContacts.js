@@ -26,6 +26,9 @@ module.exports = {
         const users = xlsx.utils.sheet_to_json(worksheet);
         
         for (const user of users) {
+          console.log(user);
+          
+          /*
           const User = await UserSchema.findOne({
             ID: user + "@c.us"
           });
@@ -35,6 +38,7 @@ module.exports = {
           await UserSchema.create({
             ID: user + "@c.us"
           });
+          */
         }
         
         response.edit("✔〢Contatos adicionados.");
