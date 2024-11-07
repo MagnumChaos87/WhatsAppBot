@@ -42,7 +42,7 @@ module.exports = {
       const week = 7 * day;
       
       setInterval(async () => {
-        await sendAd();
+        
       }, minute);
       
       async function sendAd() {
