@@ -1,4 +1,4 @@
-
+const { Buttons } = require("whatsapp-web.js");
 
 module.exports = {
   data: {
@@ -7,13 +7,9 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
-      message.reply({
-        text: "teste",
-        buttons: [{
-          body: "Instagram",
-          url: "https://www.instagram.com/rfoliveirasc/"
-        }]
-      })
+      const teste = new Buttons("Texto teste", [{body: "Instagram", url: "https://www.instagram.com/rfoliveirasc/"}]);
+      
+      message.reply(teste)
     } catch(err) {
       console.log(err)
     }
