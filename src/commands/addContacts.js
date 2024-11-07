@@ -33,7 +33,7 @@ module.exports = {
         const users = xlsx.utils.sheet_to_json(worksheet);
         
         for (const user of users) {
-          const phoneNumber = Object.keys(user)[0].replace(/-|[+]/g, "");
+          const phoneNumber = Object.keys(user)[0].replace(/-|[+]|\s/g, "");
           
           if (!/[0-9]{12,13}/.test(phoneNumber)) continue;
           
