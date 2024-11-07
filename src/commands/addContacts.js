@@ -2,6 +2,10 @@ const UserSchema = require("../schemas/UserSchema");
 
 const xlsx = require("xlsx");
 
+const fs = require("fs");
+
+const path = require("path");
+
 module.exports = {
   data: {
     name: "addContacts",
@@ -12,12 +16,15 @@ module.exports = {
       if (!message.hasMedia) return message.reply("✖〢Para usar este comando, é necessário um arquivo xlsx");
       
       const response = await message.reply("⏳〢Processando...");
-      
       const media = await message.downloadMedia();
-      
+
       if (media.mimetype === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
         
-        const workbook = xlsx.readFile(media.filename);
+        const tempFilePath = path.join(__dirname, "temp.xlsx");
+        
+        fs.writeFileSync(tempFilePath, media.data, { encoding: "base64" });
+        
+        const workbook = xlsx.readFile(tempFilePath);
         
         const sheetName = workbook.SheetNames[0];
         
@@ -28,25 +35,21 @@ module.exports = {
         for (const user of users) {
           console.log(user);
           
-          /*
-          const User = await UserSchema.findOne({
-            ID: user + "@c.us"
-          });
+          const User = await UserSchema.findOne({ ID: user + "@c.us" });
           
           if (User) continue;
           
-          await UserSchema.create({
-            ID: user + "@c.us"
-          });
-          */
+          await UserSchema.create({ ID: user + "@c.us" });
         }
+        
+        fs.unlinkSync(tempFilePath);
         
         response.edit("✔〢Contatos adicionados.");
       } else {
         response.edit("✖〢Arquivo não suportado.");
       }
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }
 }
