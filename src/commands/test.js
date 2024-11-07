@@ -7,7 +7,7 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
-      const teste = new Buttons("Texto teste", [{body: "testando"}]);
+      const teste = new Buttons("Texto teste", [{body: "testando", type: "url", url: "https://www.instagram.com/rfoliveirasc/"}]);
       
       message.reply(teste)
     } catch(err) {
