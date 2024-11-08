@@ -9,7 +9,7 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
-      const phoneNumberId = "+5521983196551";
+      const phoneNumberId = "122094248852621060";
       
       const recipientNumber = "+5521983196551";
       
