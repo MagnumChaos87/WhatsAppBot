@@ -44,7 +44,7 @@ module.exports = {
           'Authorization': `Bearer ${process.env.META_TOKEN}`,
           'Content-Type': 'application/json'
         }
-      })
+      });
     } catch(err) {
       console.log(err)
     }
