@@ -3,10 +3,12 @@ const UserSchema = require("../schemas/UserSchema");
 const commands = require("../handlers/commandsHandler");
 
 module.exports = {
-  name: "message",
+  name: "messageCreate",
   async execute(message, client) {
     try {
       const prefix = "!";
+      
+      if (!message.body.startsWith(prefix)) return;
       
       const User = await UserSchema.findOne({
         ID: message.from
