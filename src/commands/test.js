@@ -1,4 +1,6 @@
-const fetch = require("node-fetch");
+const axios = require("axios");
+
+require("dotenv").config();
 
 module.exports = {
   data: {
@@ -7,11 +9,9 @@ module.exports = {
   },
   async execute(message, args, client) {
     try {
-      const token = "1248967809636648|CSK77j1pDS0aAYiRgt1yPOa9x90"; // Substitua pelo seu token
+      const phoneNumberId = "+554792377108";
       
-      const phoneNumberId = "+554792377108"; // Substitua pelo ID do número de telefone
-      
-      const recipientNumber = "+5521983196551"; // Substitua pelo número de telefone do destinatário, no formato E.164 (ex: +5511999998888)
+      const recipientNumber = "+5521983196551";
       
       const data = {
         messaging_product: "whatsapp",
@@ -39,13 +39,11 @@ module.exports = {
         }
       };
       
-      fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
-        method: "POST",
+      axios.post(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, data, {
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+          'Authorization': `Bearer ${process.env.META_TOKEN}`,
+          'Content-Type': 'application/json'
+        }
       })
     } catch(err) {
       console.log(err)
