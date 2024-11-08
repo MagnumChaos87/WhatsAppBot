@@ -3,7 +3,7 @@ const UserSchema = require("../schemas/UserSchema");
 const commands = require("../handlers/commandsHandler");
 
 module.exports = {
-  name: "messageCreate",
+  name: "message_create",
   async execute(message, client) {
     try {
       const prefix = "!";
