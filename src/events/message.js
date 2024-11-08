@@ -21,7 +21,7 @@ module.exports = {
         const command = client.commands.get(args[0]);
         
         if (command) {
-          if (command.data.type !== this.name) return;
+          if (command.data.type !== "message") return;
           
           command.execute(message, args, client);
           
